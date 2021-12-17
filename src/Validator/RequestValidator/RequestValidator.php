@@ -2,58 +2,44 @@
 
 declare(strict_types=1);
 
-namespace PoPBackbone\GraphQLParser\Validator\RequestValidator;
+namespace PoP\GraphQLParser\Validator\RequestValidator;
 
-use PoPBackbone\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoPBackbone\GraphQLParser\Execution\Request;
+use PoP\BasicService\BasicServiceTrait;
+use PoPBackbone\GraphQLParser\Validator\RequestValidator\RequestValidator as UpstreamRequestValidator;
 
-class RequestValidator implements RequestValidatorInterface
+class RequestValidator extends UpstreamRequestValidator implements RequestValidatorInterface
 {
-    public function validate(Request $request): void
+    use BasicServiceTrait;
+
+    protected function getFragmentNotUsedErrorMessage(string $fragmentName): string
     {
-        $this->assertFragmentReferencesValid($request);
-        $this->assetFragmentsUsed($request);
-        $this->assertAllVariablesExists($request);
-        $this->assertAllVariablesUsed($request);
+        return \sprintf(
+            $this->getTranslationAPI()->__('Fragment \'%s\' not used', 'graphql-parser'),
+            $fragmentName
+        );
     }
 
-    private function assetFragmentsUsed(Request $request)
+    protected function getFragmentNotDefinedInQueryErrorMessage(string $fragmentName): string
     {
-        foreach ($request->getFragmentReferences() as $fragmentReference) {
-            $request->getFragment($fragmentReference->getName())->setUsed(true);
-        }
-
-        foreach ($request->getFragments() as $fragment) {
-            if (!$fragment->isUsed()) {
-                throw new InvalidRequestException(sprintf('Fragment \'%s\' not used', $fragment->getName()), $fragment->getLocation());
-            }
-        }
+        return \sprintf(
+            $this->getTranslationAPI()->__('Fragment \'%s\' not defined in query', 'graphql-parser'),
+            $fragmentName
+        );
     }
 
-    private function assertFragmentReferencesValid(Request $request)
+    protected function getVariableDoesNotExistErrorMessage(string $variableName): string
     {
-        foreach ($request->getFragmentReferences() as $fragmentReference) {
-            if (!$request->getFragment($fragmentReference->getName())) {
-                throw new InvalidRequestException(sprintf('Fragment \'%s\' not defined in query', $fragmentReference->getName()), $fragmentReference->getLocation());
-            }
-        }
+        return \sprintf(
+            $this->getTranslationAPI()->__('Variable \'%s\' does not exist', 'graphql-parser'),
+            $variableName
+        );
     }
 
-    private function assertAllVariablesExists(Request $request)
+    protected function getVariableNotUsedErrorMessage(string $variableName): string
     {
-        foreach ($request->getVariableReferences() as $variableReference) {
-            if (!$variableReference->getVariable()) {
-                throw new InvalidRequestException(sprintf('Variable \'%s\' not exists', $variableReference->getName()), $variableReference->getLocation());
-            }
-        }
-    }
-
-    private function assertAllVariablesUsed(Request $request)
-    {
-        foreach ($request->getQueryVariables() as $queryVariable) {
-            if (!$queryVariable->isUsed()) {
-                throw new InvalidRequestException(sprintf('Variable \'%s\' not used', $queryVariable->getName()), $queryVariable->getLocation());
-            }
-        }
+        return \sprintf(
+            $this->getTranslationAPI()->__('Variable \'%s\' not used', 'graphql-parser'),
+            $variableName
+        );
     }
 }
