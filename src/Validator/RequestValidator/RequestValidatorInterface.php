@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoP\GraphQLParser\Validator\RequestValidator;
+namespace PoPBackbone\GraphQLParser\Validator\RequestValidator;
 
-use PoPBackbone\GraphQLParser\Validator\RequestValidator\RequestValidatorInterface as UpstreamRequestValidatorInterface;
+use PoPBackbone\GraphQLParser\Execution\RequestInterface;
 
-interface RequestValidatorInterface extends UpstreamRequestValidatorInterface
+interface RequestValidatorInterface
 {
+    public function validate(RequestInterface $request);
 }

@@ -4,22 +4,16 @@ declare(strict_types=1);
 
 namespace PoPBackbone\GraphQLParser\Parser\Ast;
 
+use PoPBackbone\GraphQLParser\Parser\Ast\FragmentInterface;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
-class Directive extends AbstractAst
+class FragmentReference extends AbstractAst implements FragmentInterface
 {
-    use AstArgumentsTrait;
-
-    /**
-     * @param Argument[] $arguments
-     */
     public function __construct(
-        private $name,
-        array $arguments,
+        protected string $name,
         Location $location,
     ) {
         parent::__construct($location);
-        $this->setArguments($arguments);
     }
 
     public function getName(): string
