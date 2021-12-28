@@ -2,33 +2,28 @@
 
 declare(strict_types=1);
 
-namespace PoPBackbone\GraphQLParser\Parser\Ast;
+namespace PoP\GraphQLParser\Parser\Ast;
 
+use PoPBackbone\GraphQLParser\Parser\Ast\Argument;
+use PoPBackbone\GraphQLParser\Parser\Ast\Directive as UpstreamDirective;
 use PoPBackbone\GraphQLParser\Parser\Location;
 
-class Directive extends AbstractAst
+class Directive extends UpstreamDirective
 {
-    use WithArgumentsTrait;
+    use MaybeNonLocatableAstTrait;
 
     /**
      * @param Argument[] $arguments
      */
     public function __construct(
-        private $name,
+        string $name,
         array $arguments,
-        Location $location,
+        ?Location $location = null,
     ) {
-        parent::__construct($location);
-        $this->setArguments($arguments);
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): void
-    {
-        $this->name = $name;
+        parent::__construct(
+            $name,
+            $arguments,
+            $this->getLocation($location),
+        );
     }
 }

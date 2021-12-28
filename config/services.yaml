@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoP\GraphQLParser\Parser\ParserInterface:
+        class: \PoP\GraphQLParser\Parser\Parser
+
+    PoP\GraphQLParser\Query\QueryAugmenterServiceInterface:
+        class: \PoP\GraphQLParser\Query\QueryAugmenterService
