@@ -2,20 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPBackbone\GraphQLParser\Parser;
+namespace PoP\GraphQLParser\Parser;
 
-use PoPBackbone\GraphQLParser\Parser\Ast\ArgumentValue\Literal;
-use PoPBackbone\GraphQLParser\Parser\Ast\Document;
+use PoPBackbone\GraphQLParser\Parser\ParserInterface as UpstreamParserInterface;
 
-interface ParserInterface
+interface ParserInterface extends UpstreamParserInterface
 {
-    public function parse(string $source): Document;
 
-    /**
-     * @param string|int|float|bool|null $value
-     */
-    public function createLiteral(
-        string|int|float|bool|null $value,
-        Location $location
-    ): Literal;
 }
