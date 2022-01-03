@@ -20,6 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             \PoP\BasicService\Component::class,
+            \PoP\Engine\Component::class,
         ];
     }
 
@@ -34,6 +35,15 @@ class Component extends AbstractComponent
         bool $skipSchema = false,
         array $skipSchemaComponentClasses = []
     ): void {
+        ComponentConfiguration::setConfiguration($configuration);
         self::initServices(dirname(__DIR__));
+    }
+
+    /**
+     * Reset the state. Called during PHPUnit testing.
+     */
+    public static function reset(): void
+    {
+        ComponentConfiguration::reset();
     }
 }
