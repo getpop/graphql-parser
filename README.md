@@ -9,29 +9,21 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Syntax to query GraphQL through URL params, which grants a GraphQL API the capability to be cached on the server.
+Parser for the GraphQL syntax
+
+This component is a fork of [Youshido GraphQL](https://github.com/youshido-php/GraphQL), extracting the parser functionality from within.
 
 ## Install
 
 Via Composer
 
-```php bash
-composer require getpop/graphql-parser
+``` bash
+composer require pop-backbone/graphql-parser
 ```
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/graphql-parser`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/graphql-parser).
-
-## Usage
-
-Initialize the component:
-
-``` php
-\PoP\Engine\App::stockAndInitializeComponentClasses([([
-    \PoP\GraphQLParser\Component::class,
-]);
-```
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Backbone/packages/graphql-parser`](https://github.com/leoloso/PoP/tree/master/layers/Backbone/packages/graphql-parser).
 
 ## PHP versions
 
@@ -74,8 +66,18 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Testing
 
-```php bash
-$ composer test
+To execute [PHPUnit](https://phpunit.de/), run:
+
+``` bash
+composer test
+```
+
+## Static Analysis
+
+To execute [PHPStan](https://github.com/phpstan/phpstan), run:
+
+``` bash
+composer analyse
 ```
 
 ## Report issues
@@ -101,17 +103,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/getpop/graphql-parser.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/pop-backbone/graphql-parser.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/getpop/graphql-parser/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/getpop/graphql-parser.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/getpop/graphql-parser.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/getpop/graphql-parser.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/pop-backbone/graphql-parser/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/pop-backbone/graphql-parser.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/pop-backbone/graphql-parser.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/pop-backbone/graphql-parser.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/getpop/graphql-parser
-[link-travis]: https://travis-ci.org/getpop/graphql-parser
-[link-scrutinizer]: https://scrutinizer-ci.com/g/getpop/graphql-parser/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/getpop/graphql-parser
-[link-downloads]: https://packagist.org/packages/getpop/graphql-parser
+[link-packagist]: https://packagist.org/packages/pop-backbone/graphql-parser
+[link-travis]: https://travis-ci.org/pop-backbone/graphql-parser
+[link-scrutinizer]: https://scrutinizer-ci.com/g/pop-backbone/graphql-parser/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/pop-backbone/graphql-parser
+[link-downloads]: https://packagist.org/packages/pop-backbone/graphql-parser
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors
